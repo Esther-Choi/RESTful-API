@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.mapper.RestMapper">
+
+
+	<insert id="insert">
+		INSERT INTO TBL_REST (NUM, LOGINID, PASSWORD, NICKNAME)
+		VALUES(SEQ_REST.NEXTVAL, #{loginId}, #{password}, #{nickname})
+	</insert>
+	
+	<select id="login" resultType="_int">
+		SELECT COUNT(*) FROM TBL_REST WHERE LOGINID = #{loginId} AND PASSWORD = #{password}
+	</select>
+	
+	<select id="checkId" resultType="_int">
+		SELECT COUNT(*) FROM TBL_REST WHERE LOGINID = #{loginId}
+	</select>
+	
+	<select id="get" resultType="com.koreait.domain.UserVO">
+		SELECT * FROM TBL_REST WHERE TOKEN = #{token}
+	</select>
+	
+	<update id="editToken">
+	UPDATE TBL_REST 
+	SET TOKEN = #{token}
+	WHERE LOGINID = #{loginId}
+	</update>
+	
+</mapper>
+
